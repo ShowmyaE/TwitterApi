@@ -6,10 +6,7 @@ const app = express()
 app.use(express.json())
 // const mongoUrl = "mongodb://localhost:27017/Twitter"
 const mongoUrl = process.env.MONGO_URL
-mongoose.connect(mongoUrl, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }).then(() => {
+mongoose.connect(mongoUrl).then(() => {
     console.log('Connected DB')
     app.listen(5000, () => {
         console.log('Server Running at http://localhost:5000')
@@ -133,7 +130,7 @@ app.post("/tweets", authentication, async (req, res) => {
         const userDbDetails = await tweetsModel.find();
         console.log("INSET", userDbDetails);
         if (insertData) {
-            res.send({ data: "successfully inserted" })
+            res.send({ data: "successfully inserted", userDbDetails })
         }
         else {
             res.status(400)
