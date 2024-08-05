@@ -127,10 +127,10 @@ app.post("/tweets", authentication, async (req, res) => {
         });
         console.log("TWEET DATA", user)
         const insertData = await user.save();
-        const userDbDetails = await tweetsModel.find();
+        const userDbDetails = await tweetsModel.find({});
         console.log("INSET", userDbDetails);
         if (insertData) {
-            res.send({ data: "successfully inserted", userDbDetails })
+            res.send({ data: "successfully inserted", insertData })
         }
         else {
             res.status(400)
