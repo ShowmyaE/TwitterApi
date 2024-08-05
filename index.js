@@ -1,11 +1,11 @@
 const express = require('express')
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
-
+require('dotenv').config();
 const app = express()
 app.use(express.json())
-const mongoUrl = "mongodb://localhost:27017/Twitter"
-
+// const mongoUrl = "mongodb://localhost:27017/Twitter"
+const mongoUrl = process.env.MONGO_URL
 mongoose.connect(mongoUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
